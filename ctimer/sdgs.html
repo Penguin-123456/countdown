@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2024クリスマス|カウントダウンタイマー</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="css/progress.css">
+</head>
+<body>
+    <noscript>
+        <h4><i class="material-icons left">info</i>お知らせ</h4>
+        <p>Javascriptを有効にしてください。有効にしないとこのサイトは<b>機能しません</b>。</p>
+    </noscript>
+    <div class="progress-container">
+        <div class="progress-bar" id="myBar"></div>
+    </div>
+    <div class="navbar-fixed">
+        <nav class="cyan lighten-1">
+            <div class="nav-wrapper">
+              <a href="index.html" class="brand-logo">カウントダウンタイマー</a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="index.html"><i class="material-icons left">home</i>ホーム</a></li>
+              </ul>
+            </div>
+        </nav>
+    </div>
+    <p class="atdays">SDGs達成期限まであと</p>
+    <p id="countTimer"></p>
+    <nav class="cyan lighten-1">
+        <div class="nav-wrapper">
+          <div class="col s12">
+            <a href="index.html" class="breadcrumb">ホーム</a>
+            <a href="sdgs.html" class="breadcrumb">SDGs達成期限まで</a>
+          </div>
+        </div>
+    </nav>
+</body>
+<script>
+    // タイマーの日付を設定
+    var countDownDate = new Date("Jan 1, 2030 0:00:00").getTime();
+    // 1秒おきに更新
+    var x = setInterval(function() {
+    // 今日の日付と時間を取得
+    var now = new Date().getTime();
+
+    // 日付と時間の計算
+    var distance = countDownDate - now;
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // 出力する内容
+    document.getElementById("countTimer").innerHTML = days + "<span>日</span>" + hours + "<span>時間</span>"
+    + minutes + "<span>分</span>" + seconds + "<span>秒</span>";
+
+    // タイマー終了後
+    if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("countTimer").innerHTML = "🎅Merry Christmas!✨";
+    }
+    }, 1000);
+</script>
+<script src="js/progress.js"></script>
+<style>
+    p.atdays {
+        margin: 0 auto 10px;
+        background: #64b5f6;
+        color: #313131;
+        padding: 3px 20px;
+        position: relative;
+        border-radius: 6px;
+        font-size: 200%;
+        text-align: center;
+    }
+    p.atdays:after {
+        content: "";
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        margin-left: -10px;
+        border: 10px solid transparent;
+        border-top: 10px solid #64b5f6;
+        z-index: 2;
+    }
+    p#countTimer {
+        margin: 0;
+        font-size: 10rem;
+        font-weight: 200;
+        letter-spacing: 0.08rem;
+        text-align: center;
+    }
+    p#countTimer span {
+        font-size: 5rem;
+        font-weight: 400;
+        margin-right: 10px;
+    }
+</style>
